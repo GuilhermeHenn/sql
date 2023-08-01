@@ -402,3 +402,66 @@ GROUP BY payment.customer_id
 HAVING Total >= 150 AND Compras >= 35
 ORDER BY Total DESC;
 ```
+
+## SubQuery
+Uma Subquery, também conhecida como subconsulta ou subselect, é uma consulta SQL que é aninhada dentro de uma consulta principal.
+
+```sql
+USE sakila;
+
+SELECT *
+FROM payment
+WHERE amount > (SELECT AVG(amount) FROM payment)
+ORDER BY amount ASC;
+```
+
+```sql
+USE sakila;
+
+SELECT * 
+FROM payment 
+WHERE amount = 
+	(SELECT MAX(amount) 
+	FROM payment 
+	WHERE customer_id = 2);
+```
+
+```sql
+USE sakila;
+
+SELECT *
+FROM customer
+WHERE customer_id IN
+	(SELECT
+		customer_id
+	FROM payment
+	GROUP BY customer_id
+	HAVING COUNT(amount) > 35);
+```
+
+## Views
+A View é uma representação virtual de uma ou mais tabelas em um banco de dados. Ela é criada a partir de uma consulta SQL que seleciona colunas específicas ou combina dados de uma ou mais tabelas em uma única estrutura lógica.
+
+Em outras palavras, uma view é uma consulta armazenada que pode ser tratada como uma tabela virtual. Ela não possui dados físicos associados a ela; em vez disso, sempre que a view é consultada, os dados são obtidos diretamente das tabelas subjacentes conforme definido pela consulta de criação da view.
+
+```sql
+USE sakila;
+
+-- Criação da view
+CREATE OR REPLACE VIEW vendas_por_cliente AS
+SELECT
+		customer.customer_id,
+    customer.first_name,
+    customer.last_name,
+    payment.amount
+FROM customer
+JOIN payment
+	ON customer.customer_id = payment.payment_id;
+```
+
+```sql
+USE sakila;
+
+-- Exclusão da view
+DROP VIEW vendas_por_cliente;
+```
