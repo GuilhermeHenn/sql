@@ -261,35 +261,35 @@ O operador UNION, por default, executa o equivalente a um SELECT DISTINCT no res
 USE sakila;
 
 SELECT 
-    cus.customer_id,
-    cus.first_name,
-    cus.last_name,
-    adr.address,
-    pay.rental_id,
-    pay.amount,
-    'VIP' AS Status 
+  cus.customer_id,
+  cus.first_name,
+  cus.last_name,
+  adr.address,
+  pay.rental_id,
+  pay.amount,
+  'VIP' AS Status 
 FROM customer cus
 JOIN payment pay
-    ON cus.customer_id = pay.customer_id
+  ON cus.customer_id = pay.customer_id
 JOIN address adr 
-    ON cus.address_id = adr.address_id
+  ON cus.address_id = adr.address_id
 WHERE pay.amount >= 10.99
 
 UNION
 
 SELECT 
-    cus.customer_id,
-    cus.first_name,
-    cus.last_name,
-    adr.address,
-    pay.rental_id,
-    pay.amount,
-    'NON VIP' AS Status
+  cus.customer_id,
+  cus.first_name,
+  cus.last_name,
+  adr.address,
+  pay.rental_id,
+  pay.amount,
+  'NON VIP' AS Status
 FROM customer cus
 JOIN payment pay
-    ON cus.customer_id = pay.customer_id
+  ON cus.customer_id = pay.customer_id
 JOIN address adr 
-    ON cus.address_id = adr.address_id
+  ON cus.address_id = adr.address_id
 WHERE pay.amount < 10.99;
 ```
 
@@ -434,9 +434,9 @@ FROM customer
 WHERE customer_id IN
 	(SELECT
 		customer_id
-	FROM payment
-	GROUP BY customer_id
-	HAVING COUNT(amount) > 35);
+	  FROM payment
+	  GROUP BY customer_id
+	  HAVING COUNT(amount) > 35);
 ```
 
 ## Views
@@ -450,10 +450,10 @@ USE sakila;
 -- Criação da view
 CREATE OR REPLACE VIEW vendas_por_cliente AS
 SELECT
-		customer.customer_id,
-    customer.first_name,
-    customer.last_name,
-    payment.amount
+  customer.customer_id,
+  customer.first_name,
+  customer.last_name,
+  payment.amount
 FROM customer
 JOIN payment
 	ON customer.customer_id = payment.payment_id;
@@ -469,9 +469,7 @@ DROP VIEW vendas_por_cliente;
 ## Funções para Strings
 Abaixo podemos ver alguns exemplos de funções utilizadas para manipular Strings.
 
-
 ```sql
-
 -- Remover os espaços do início e fim da string (esquerda/direita)
 SELECT TRIM('   Carros   ');
 
@@ -513,7 +511,7 @@ SELECT RIGHT('Carros', 4);
 
 -- Exemplo: em lower case, consultar o 'first_name' de todos os clientes
 SELECT 
-	LCASE(first_name)
+  LCASE(first_name)
 FROM customer;
 ```
 
@@ -534,7 +532,7 @@ USE carros;
 
 -- Criação da tabela 'marcas' e inserção de dados na mesma
 CREATE TABLE marcas (
-	id INT NOT NULL AUTO_INCREMENT,
+    id INT NOT NULL AUTO_INCREMENT,
     nome_marca VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 );
