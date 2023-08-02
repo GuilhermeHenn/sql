@@ -465,3 +465,84 @@ USE sakila;
 -- Exclusão da view
 DROP VIEW vendas_por_cliente;
 ```
+
+## Funções para Strings
+Abaixo podemos ver alguns exemplos de funções utilizadas para manipular Strings.
+
+
+```sql
+
+-- Remover os espaços do início e fim da string (esquerda/direita)
+SELECT TRIM('   Carros   ');
+
+-- Remover os espaços do início da string (esquerda)
+SELECT LTRIM('   Carros   ');
+
+-- Remover os espaços do fim da string (direita)
+SELECT RTRIM('   Carros   ');
+
+-- Remover as letras "a" do início e fim da string (esquerda/direita)
+SELECT TRIM(BOTH 'a' FROM 'aaaCarrosaaa');
+
+-- Remover as letras "a" do início da string (esquerda)
+SELECT TRIM(LEADING 'a' FROM 'aaaCarrosaaa');
+
+-- Remover as letras "a" do fim da string (direita)
+SELECT TRIM(TRAILING 'a' FROM 'aaaCarrosaaa');
+
+-- Localizar a posição da letra "o" na string
+SELECT LOCATE('o', 'Carros');
+
+-- Alterar a string para lower case
+SELECT LCASE('Carros');
+
+-- Alterar a string para upper case
+SELECT UCASE('Carros');
+
+-- Verificar o tamanho da string
+SELECT LENGTH('Carros');
+
+-- Repetir a string 4x
+SELECT REPEAT('Carros', 4);
+
+-- Escrever as 4 primeiras letras da string (esquerda)
+SELECT LEFT('Carros', 4);
+
+-- Escrever as 4 últimas letras da string (direita)
+SELECT RIGHT('Carros', 4);
+
+-- Exemplo: em lower case, consultar o 'first_name' de todos os clientes
+SELECT 
+	LCASE(first_name)
+FROM customer;
+```
+
+## Databases
+
+```sql
+-- Exclusão do database 'sakila'
+DROP DATABASE sakila;
+```
+
+```sql
+-- Criação do database 'carros'
+CREATE DATABASE carros;
+```
+
+```sql
+USE carros;
+
+-- Criação da tabela 'marcas' e inserção de dados na mesma
+CREATE TABLE marcas (
+	id INT NOT NULL AUTO_INCREMENT,
+    nome_marca VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+```
+
+```sql
+USE carros;
+
+-- Adição da coluna 'origem' na tabela 'marcas'
+ALTER TABLE marcas ADD origem VARCHAR(255);
+```
