@@ -294,12 +294,13 @@ WHERE pay.amount < 10.99;
 ```
 
 ## INSERT - Inserção de dados em uma tabela
+
 ```sql
 USE sakila;
 
 INSERT INTO language
 VALUES 
-	(DEFAULT, 'Portuguese', '2008-02-10 05:02:19'),
+  (DEFAULT, 'Portuguese', '2008-02-10 05:02:19'),
   (DEFAULT, 'Spanish', '2010-08-30 10:02:11'),
   (DEFAULT, 'Polish', '2012-02-16 12:02:02');
 ```
@@ -309,12 +310,12 @@ USE sakila;
 
 -- inserção de dados em mais de uma tabela
 INSERT INTO country
-VALUES 
-	(DEFAULT, 'Brazil2', '2022-02-15 04:44:00');
+VALUES
+  (DEFAULT, 'Brazil2', '2022-02-15 04:44:00');
     
 INSERT INTO city
 VALUES 
-	(DEFAULT, 'Rio grande do sul2', last_insert_id(), '2022-02-15 04:44:00');
+  (DEFAULT, 'Rio grande do sul2', last_insert_id(), '2022-02-15 04:44:00');
 ```
 
 ## CREATE - Backup de uma tabela
@@ -345,9 +346,9 @@ USE sakila;
 
 UPDATE payment
 SET 
-	amount = 15.99
+  amount = 15.99
 WHERE
-	payment_id = 1;
+  payment_id = 1;
 ```
 
 ## DELETE - Exclusão de determinados registros da tabela
@@ -432,8 +433,7 @@ USE sakila;
 SELECT *
 FROM customer
 WHERE customer_id IN
-	(SELECT
-		customer_id
+	(SELECT customer_id
 	  FROM payment
 	  GROUP BY customer_id
 	  HAVING COUNT(amount) > 35);
