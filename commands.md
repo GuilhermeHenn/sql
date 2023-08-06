@@ -613,3 +613,59 @@ VALUES
   ('BMW 218', 'Automatica', '2.0', 'Gasolina', 1),
   ('XE 2.0D', 'Manual', '2.0', 'Diesel', 5);
 ```
+
+## Users
+```sql
+-- Verificação os usuários existentes
+SELECT * FROM mysql.user;
+```
+
+```sql
+-- Criação de usuários especificando de onde podem acessar o database
+CREATE USER ana IDENTIFIED BY '1212';
+CREATE USER joao@localhost IDENTIFIED BY '9999';
+CREATE USER priscila@192.168.10.1 IDENTIFIED BY '1111';
+```
+
+```sql
+-- Exclusão de um usuário
+DROP USER priscila@192.168.10.1;
+```
+
+```sql
+-- Redefinição da senha do usuário
+SET PASSWORD FOR joao@localhost = '121234';
+```
+
+```sql
+-- Concessão de habilitações para o usuário 'ana' no database 'sakila'
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON sakila.*
+TO ana;
+```
+
+```sql
+-- Verificação dos privilégios de um usuário
+SHOW GRANTS FOR ana;
+```
+
+```sql
+-- Concessão de habilitação total para o usuário 'ana' no database 'sakila'
+GRANT ALL
+ON sakila.*
+TO ana;
+```
+
+```sql
+-- Concessão de habilitação total para o usuário 'joao' em todo o MySQL
+GRANT ALL
+ON *.*
+TO joao@localhost;
+```
+
+```sql
+-- Remoção do privilégio UPDATE para o usuário 'pricila'
+REVOKE UPDATE
+ON sakila.*
+FROM pricila@192.168.10.1;
+```
